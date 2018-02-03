@@ -1,0 +1,16 @@
+---
+- name: hw1 playbook
+  hosts: hw1
+  sudo: yes
+
+  tasks:
+
+  - name: install apache before deploy
+    apt: name=apache2 update_cache=yes state=latest
+
+  - name: clone the hw0
+    git:
+      repo: 'https://github.com/zhzou/cse356HW.git'
+      dest: /var/www/tmp
+  - name: move hw0 into apache
+    command: mv /var/www/tmp/hw0.html /var/www/html
